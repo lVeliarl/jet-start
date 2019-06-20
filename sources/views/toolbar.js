@@ -1,11 +1,21 @@
 import {JetView} from "webix-jet";
 
 export default class Toolbar extends JetView {
+	constructor(app, name, data) {
+		super(app, name);
+		console.log(data);
+	}
+
 	config() {
-		return {view: "toolbar",
-			height: 50,
-			elements: [
-				{view: "label", label: "My App", align: "center"}
-			]};
+		return {
+			view: "label",
+			label: "My App",
+			align: "center",
+			height: 50
+		};
+	}
+
+	init() {
+		console.log(this.getRoot().data.label);
 	}
 }

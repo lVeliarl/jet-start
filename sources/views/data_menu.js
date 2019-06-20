@@ -1,12 +1,14 @@
 import {JetView} from "webix-jet";
 import Toolbar from "./toolbar";
 import Data from "./data";
+import {countries} from "../models/countries";
+import {statuses} from "../models/statuses";
 
 export default class DataMenuView extends JetView {
 	config() {
 		return {
 			rows: [
-				Toolbar,
+				new Toolbar(this.app, "", "Data"),
 				{cols: [
 					{view: "list",
 						id: "data_list",
@@ -24,17 +26,9 @@ export default class DataMenuView extends JetView {
 							}
 						}
 					},
-					{rows: [
-						Data,
-						{cols: [
-							{gravity: 2},
-							{view: "button",
-								value: "Add new",
-								click: () => {}
-							},
-							{view: "button", value: "Delete"}
-						],
-						type: "empty"}
+					{cells: [
+						{$subview: new Data(this.app, "", countries), id: "countries_switch"},
+						{$subview: new Data(this.app, "", statuses), id: "statuses_switch"}
 					]}
 				]}
 			]

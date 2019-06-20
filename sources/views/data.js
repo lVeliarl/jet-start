@@ -1,16 +1,37 @@
 import {JetView} from "webix-jet";
-import DataView from "./data_view";
-import {countries} from "../models/countries";
-import {statuses} from "../models/statuses";
 
 export default class Data extends JetView {
+	constructor(app, name, data) {
+		super(app, name);
+		this._gridData = data;
+	}
+
 	config() {
 		return {
-			cells: [
-				{$subview: new DataView(this.app, "", countries), id: "countries_switch"},
-				{$subview: new DataView(this.app, "", statuses), id: "statuses_switch"}
+			rows: [
+				{view: "datatable",
+					editable: true,
+					borderless: true,
+					editor: "text",
+					editaction: "dblclick",
+					autoConfig: true,
+					scroll: "auto",
+					css: "webix_shadow_medium"},
+				{cols: [
+					{gravity: 2},
+					{view: "button",
+						value: "Add new",
+						click: () => {}
+					},
+					{view: "button", value: "Delete"}
+				],
+				type: "empty"}
 			]
 		};
+	}
+
+	init(view) {
+		view.queryView("datatable").parse(this._gridData);
 	}
 }
 
