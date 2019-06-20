@@ -13,7 +13,8 @@ export default class DataView extends JetView {
 			editaction: "dblclick",
 			autoConfig: true,
 			scroll: "auto",
-			css: "webix_shadow_medium"};
+			css: "webix_shadow_medium"
+		};
 	}
 
 	init(view) {

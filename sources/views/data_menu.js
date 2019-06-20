@@ -8,16 +8,20 @@ export default class DataMenuView extends JetView {
 			rows: [
 				Toolbar,
 				{cols: [
-					{view: "menu",
+					{view: "list",
 						width: 200,
-						localId: "data:menu",
-						layout: "y",
 						select: true,
 						template: "#value#",
 						data: [
-							{value: "Countries", id: "countries"},
-							{value: "Statuses", id: "statuses"}
-						]},
+							{value: "Countries", id: "countries_switch"},
+							{value: "Statuses", id: "statuses_switch"}
+						],
+						on: {
+							onAfterSelect(id) {
+								$$(id).show();
+							}
+						}
+					},
 					{rows: [
 						Data,
 						{cols: [
@@ -32,7 +36,7 @@ export default class DataMenuView extends JetView {
 		};
 	}
 
-	init() {
-		this.use(plugins.Menu, "data:menu");
-	}
+	// init() {
+	// 	this.use(plugins.Menu, "data:menu");
+	// }
 }
