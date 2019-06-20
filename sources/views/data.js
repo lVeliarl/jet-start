@@ -1,12 +1,12 @@
 import {JetView} from "webix-jet";
-import {data} from "../models/records";
+import DataView from "./data_view";
+import {countries} from "../models/countries";
+//	import {statuses} from "../models/statuses";
 
-export default class DataView extends JetView {
+export default class Data extends JetView {
 	config() {
-		return {view: "datatable", autoConfig: true, css: "webix_shadow_medium"};
-	}
-
-	init(view) {
-		view.parse(data);
+		return new DataView(this.app, "", countries);
 	}
 }
+
+//	{$subview: new DataView(this.app, "", statuses)}
