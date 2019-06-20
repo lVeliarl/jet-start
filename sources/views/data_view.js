@@ -8,6 +8,7 @@ export default class DataView extends JetView {
 
 	config() {
 		return {view: "datatable",
+			localId: "datatable",
 			editable: true,
 			editor: "text",
 			editaction: "dblclick",

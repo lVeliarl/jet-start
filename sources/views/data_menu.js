@@ -1,4 +1,4 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
 import Toolbar from "./toolbar";
 import Data from "./data";
 
@@ -9,8 +9,10 @@ export default class DataMenuView extends JetView {
 				Toolbar,
 				{cols: [
 					{view: "list",
+						id: "data_list",
 						width: 200,
 						select: true,
+						scroll: "auto",
 						template: "#value#",
 						data: [
 							{value: "Countries", id: "countries_switch"},
@@ -26,7 +28,10 @@ export default class DataMenuView extends JetView {
 						Data,
 						{cols: [
 							{gravity: 2},
-							{view: "button", value: "Add new"},
+							{view: "button",
+								value: "Add new",
+								click: () => {}
+							},
 							{view: "button", value: "Delete"}
 						],
 						type: "empty"}
@@ -35,8 +40,4 @@ export default class DataMenuView extends JetView {
 			]
 		};
 	}
-
-	// init() {
-	// 	this.use(plugins.Menu, "data:menu");
-	// }
 }
