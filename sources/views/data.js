@@ -7,6 +7,8 @@ export default class Data extends JetView {
 	}
 
 	config() {
+		const _ = this.app.getService("locale")._;
+
 		return {
 			rows: [
 				{
@@ -24,7 +26,7 @@ export default class Data extends JetView {
 					{gravity: 2},
 					{
 						view: "button",
-						value: "Add new",
+						value: _("Add new"),
 						css: "webix_primary",
 						click: () => {
 							let table = this.$$("data");
@@ -34,7 +36,7 @@ export default class Data extends JetView {
 					},
 					{
 						view: "button",
-						value: "Delete",
+						value: _("Delete"),
 						css: "webix_primary",
 						click: () => {
 							let table = this.$$("data");

@@ -5,19 +5,21 @@ import {statuses} from "../models/statuses";
 
 export default class ContactsForm extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
+
 		return {
 			view: "form",
 			width: "400",
 			localId: "contacts_form",
 			elements: [
-				{view: "text", name: "Name", label: "User name", labelPosition: "top"},
-				{view: "text", name: "Email", label: "Email", labelPosition: "top"},
+				{view: "text", name: "Name", label: _("User name"), labelPosition: "top"},
+				{view: "text", name: "Email", label: _("Email"), labelPosition: "top"},
 				{
 					view: "combo",
-					label: "Country",
+					label: _("Country"),
 					name: "Country",
 					localId: "countries",
-					placeholder: "Options",
+					placeholder: _("Options"),
 					options: {
 						body: {
 							template: "#Name#",
@@ -27,9 +29,9 @@ export default class ContactsForm extends JetView {
 				},
 				{
 					view: "combo",
-					label: "Status",
+					label: _("Status"),
 					name: "Status",
-					placeholder: "Options",
+					placeholder: _("Options"),
 					options: {
 						body: {
 							template: "#Name#",
@@ -41,7 +43,7 @@ export default class ContactsForm extends JetView {
 					{},
 					{
 						view: "button",
-						value: "Save",
+						value: _("Save"),
 						width: 200,
 						css: "webix_primary",
 						click: () => {

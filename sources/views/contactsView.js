@@ -7,10 +7,12 @@ webix.protoUI({
 }, webix.EditAbility, webix.ui.list);
 export default class ContactsView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
+
 		return {
 			cols: [
 				{rows: [
-					{type: "header", template: "Contacts", css: "webix_header section_header"},
+					{type: "header", template: _("Contacts"), css: "webix_header section_header"},
 					{
 						view: "edit_list",
 						editable: true,
@@ -41,7 +43,7 @@ export default class ContactsView extends JetView {
 					},
 					{
 						view: "button",
-						value: "Add",
+						value: _("Add"),
 						click: () => {
 							contacts.add({Name: "John Doe", Email: "2134@aol.com"});
 						}

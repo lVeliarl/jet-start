@@ -2,13 +2,14 @@ import {JetView} from "webix-jet";
 
 export default class SettingsView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
-				{type: "header", template: "Settings", css: "webix_header section_header"},
+				{type: "header", template: _("Settings"), css: "webix_header section_header"},
 				{cols: [
 					{
 						view: "segmented",
-						label: "Language:",
+						label: _("Language"),
 						name: "lang",
 						options: [
 							{id: "en", value: "EN"},

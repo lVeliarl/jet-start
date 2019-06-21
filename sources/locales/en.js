@@ -12,6 +12,13 @@ export default {
 	Spain: "Spain",
 	Italy: "Italy",
 	Busy: "Busy",
-	Open: "Open"
+	Open: "Open",
+	"Add new": "Add new",
+	Delete: "Delete",
+	Countries: "Countries",
+	Statuses: "Statuses",
+	Add: "Add",
+	App: "App",
+	Options: "Options"
 };
 

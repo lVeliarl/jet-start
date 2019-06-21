@@ -12,5 +12,12 @@ export default {
 	Spain: "Испания",
 	Italy: "Италия",
 	Busy: "Занят",
-	Open: "Свободен"
+	Open: "Свободен",
+	"Add new": "Добавить",
+	Delete: "Удалить",
+	Countries: "Страны",
+	Statuses: "Статусы",
+	Add: "Добавить",
+	App: "Приложение",
+	Options: "Настройки"
 };
