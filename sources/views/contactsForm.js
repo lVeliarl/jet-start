@@ -1,5 +1,7 @@
 import {JetView} from "webix-jet";
 import {contacts} from "../models/contacts";
+import {countries} from "../models/countries";
+import {statuses} from "../models/statuses";
 
 export default class ContactsForm extends JetView {
 	config() {
@@ -15,25 +17,45 @@ export default class ContactsForm extends JetView {
 					label: "Country",
 					localId: "countries",
 					placeholder: "Options",
-					options: [
-						{id: 1, value: "USA"},
-						{id: 2, value: "Canada"},
-						{id: 3, value: "Italy"}
-					]
+					options: {
+						body: {
+							template: "#Name#",
+							data: countries
+						}
+					}
 				},
 				{
 					view: "combo",
 					label: "Status",
 					value: "#Name#",
 					placeholder: "Options",
-					options: [
-						{id: 1, Name: "Busy", Icon: "cogs"},
-						{id: 2, Name: "Open", Icon: "user"}
-					]
+					options: {
+						body: {
+							template: "#Name#",
+							data: statuses
+						}
+					}
+				},
+				{cols: [
+					{},
+					{
+						view: "button",
+						value: "Save",
+						width: 200,
+						css: "webix_primary",
+						click: () => {
+							console.log(this.getRoot().getValues());
+							// this.app.callEvent("onClick", [data]);
+						}
+					}
+				]
 				},
 				{}
 			]
 		};
+	}
+
+	init() {
 	}
 
 	urlChange() {

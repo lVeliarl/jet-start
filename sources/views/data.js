@@ -9,7 +9,8 @@ export default class Data extends JetView {
 	config() {
 		return {
 			rows: [
-				{view: "datatable",
+				{
+					view: "datatable",
 					localId: "data",
 					editable: true,
 					borderless: true,
@@ -17,19 +18,24 @@ export default class Data extends JetView {
 					editaction: "dblclick",
 					autoConfig: true,
 					scroll: "auto",
-					css: "webix_shadow_medium"},
+					css: "webix_shadow_medium"
+				},
 				{cols: [
 					{gravity: 2},
-					{view: "button",
+					{
+						view: "button",
 						value: "Add new",
+						css: "webix_primary",
 						click: () => {
 							let id = this.$$("data").add({ });
 							let table = this.$$("data");
 							table.editRow(id);
 						}
 					},
-					{view: "button",
+					{
+						view: "button",
 						value: "Delete",
+						css: "webix_primary",
 						click: () => {
 							let table = this.$$("data");
 							let id = this.$$("data").getSelectedId();
