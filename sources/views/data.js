@@ -24,7 +24,8 @@ export default class Data extends JetView {
 						value: "Add new",
 						click: () => {
 							let id = this.$$("data").add({ });
-							this.$$("data").editRow(id);
+							let table = this.$$("data");
+							table.editRow(id);
 						}
 					},
 					{view: "button",

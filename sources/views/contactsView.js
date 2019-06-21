@@ -1,5 +1,6 @@
 import {JetView} from "webix-jet";
 import {contacts} from "../models/contacts";
+import ContactsForm from "./contactsForm";
 
 export default class ContactsView extends JetView {
 	config() {
@@ -13,44 +14,35 @@ export default class ContactsView extends JetView {
 						template: "#Name# <br> #Email#",
 						select: true,
 						type: {height: 62},
-						scroll: "auto"
+						scroll: "auto",
+						on: {
+							onAfterSelect: (id) => {
+								this.show(`../contactsView?id=${id}`);
+								this.app.callEvent("onAfterSelect", [id]);
+							}
+						}
 					}
 				]},
-				{
-					view: "form",
-					width: "400",
-					elements: [
-						{view: "text", label: "User name", labelPosition: "top"},
-						{view: "text", label: "Email", labelPosition: "top"},
-						{
-							view: "combo",
-							label: "Country",
-							options: [
-								{id: 1, value: "test"},
-								{id: 2, value: "test"},
-								{id: 3, value: "test"}
-							]
-						},
-						{
-							view: "combo",
-							label: "Status",
-							options: [
-								{id: 1, value: "test"},
-								{id: 2, value: "test"},
-								{id: 3, value: "test"}
-							]
-						},
-						{}
-					]
-				}
+				ContactsForm
 			]
 		};
 	}
 
 	init(view) {
-		view.queryView("list").parse(contacts);
+		view.queryView("list").sync(contacts);
+		// ContactsForm.bind(this.$$("contacts_list"));
+		// console.log(ContactsForm);
 
 		let list = this.$$("contacts_list");
 		list.select(list.getFirstId());
+	}
+
+	urlChange() {
+		let list = this.$$("contacts_list");
+		let id = this.getParam("id");
+
+		if (id && list.exists(id)) {
+			list.select(id);
+		}
 	}
 }
