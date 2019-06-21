@@ -50,7 +50,14 @@ export default class ContactsForm extends JetView {
 						css: "webix_primary",
 						click: () => {
 							let data = this.getRoot().getValues();
-							this.app.callEvent("onClick", [data]);
+							if (data.id) {
+								contacts.updateItem(data.id, data);
+								webix.message("Entry successfully updated");
+							}
+							else {
+								contacts.add(data);
+								webix.message("Entry successfully added");
+							}
 						}
 					}
 				]
@@ -58,9 +65,6 @@ export default class ContactsForm extends JetView {
 				{}
 			]
 		};
-	}
-
-	init() {
 	}
 
 	urlChange() {

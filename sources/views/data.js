@@ -27,8 +27,8 @@ export default class Data extends JetView {
 						value: "Add new",
 						css: "webix_primary",
 						click: () => {
-							let id = this.$$("data").add({ });
 							let table = this.$$("data");
+							let id = table.add({ });
 							table.editRow(id);
 						}
 					},
@@ -38,14 +38,17 @@ export default class Data extends JetView {
 						css: "webix_primary",
 						click: () => {
 							let table = this.$$("data");
-							let id = this.$$("data").getSelectedId();
-							if (table.isSelected(id)) {
-								table.remove(table.getSelectedId());
+							let id = table.getSelectedId();
+							if (id) {
+								this.webix.confirm({
+									title: "Remove this entry",
+									text: "Are you sure you want to remove this entry?"
+								}).then(() => {
+									table.remove(table.getSelectedId());
+								});
 							}
-							else if (table.getLastId()) {
-								table.editStop();
-								table.remove(table.getLastId());
-								table.editCell(table.getLastId());
+							else {
+								this.webix.message("Please select an entry to remove");
 							}
 						}}
 				],
@@ -54,8 +57,8 @@ export default class Data extends JetView {
 		};
 	}
 
-	init(view) {
-		view.queryView("datatable").parse(this._gridData);
+	init() {
+		this.$$("data").parse(this._gridData);
 	}
 }
 

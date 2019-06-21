@@ -27,6 +27,7 @@ export default class ContactsView extends JetView {
 									text: "Are you sure you want to remive this item?"
 								}).then(() => {
 									this.$$("contacts_list").remove(id);
+									this.$$("contacts_list").clearSelection();
 								});
 							}
 						}
@@ -41,17 +42,6 @@ export default class ContactsView extends JetView {
 		view.queryView("list").sync(contacts);
 		let list = this.$$("contacts_list");
 		list.select(list.getFirstId());
-
-		this.on(this.app, "onClick", (data) => {
-			if (data.id) {
-				list.updateItem(data.id, data);
-				webix.message("Entry successfully updated");
-			}
-			else {
-				list.add(data);
-				webix.message("Entry successfully added");
-			}
-		});
 	}
 
 	urlChange() {
