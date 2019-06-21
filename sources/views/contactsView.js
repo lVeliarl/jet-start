@@ -11,13 +11,23 @@ export default class ContactsView extends JetView {
 					{
 						view: "list",
 						localId: "contacts_list",
-						template: "#Name# <br> #Email#",
+						template: "#Name# <br> #Email# <span class='webix_icon wxi-close remove_contact'></span>",
 						select: true,
 						type: {height: 62},
 						scroll: "auto",
 						on: {
 							onAfterSelect: (id) => {
 								this.show(`../contactsView?id=${id}`);
+							}
+						},
+						onClick: {
+							remove_contact: (e, id) => {
+								this.webix.confirm({
+									title: "Remove this item",
+									text: "Are you sure you want to remive this item?"
+								}).then(() => {
+									this.$$("contacts_list").remove(id);
+								});
 							}
 						}
 					}
@@ -29,11 +39,19 @@ export default class ContactsView extends JetView {
 
 	init(view) {
 		view.queryView("list").sync(contacts);
-		// ContactsForm.bind(this.$$("contacts_list"));
-		// console.log(ContactsForm);
-
 		let list = this.$$("contacts_list");
 		list.select(list.getFirstId());
+
+		this.on(this.app, "onClick", (data) => {
+			if (data.id) {
+				list.updateItem(data.id, data);
+				webix.message("Entry successfully updated");
+			}
+			else {
+				list.add(data);
+				webix.message("Entry successfully added");
+			}
+		});
 	}
 
 	urlChange() {

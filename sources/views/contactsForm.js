@@ -37,15 +37,20 @@ export default class ContactsForm extends JetView {
 					}
 				},
 				{cols: [
-					{},
+					{view: "button",
+						value: "Clear",
+						width: 200,
+						click: () => {
+							this.$$("contacts_form").clear();
+						}},
 					{
 						view: "button",
 						value: "Save",
 						width: 200,
 						css: "webix_primary",
 						click: () => {
-							console.log(this.getRoot().getValues());
-							// this.app.callEvent("onClick", [data]);
+							let data = this.getRoot().getValues();
+							this.app.callEvent("onClick", [data]);
 						}
 					}
 				]
