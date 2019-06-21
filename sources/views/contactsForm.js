@@ -37,7 +37,10 @@ export default class ContactsForm extends JetView {
 	}
 
 	urlChange() {
-		let item = contacts.getItem(this.getParam("id"));
-		this.$$("contacts_form").setValues(item);
+		let id = this.getParam("id");
+		if (id) {
+			let item = contacts.getItem(id);
+			this.$$("contacts_form").setValues(item);
+		}
 	}
 }
