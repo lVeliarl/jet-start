@@ -15,6 +15,7 @@ export default class ContactsForm extends JetView {
 				{
 					view: "combo",
 					label: "Country",
+					name: "Country",
 					localId: "countries",
 					placeholder: "Options",
 					options: {
@@ -27,7 +28,7 @@ export default class ContactsForm extends JetView {
 				{
 					view: "combo",
 					label: "Status",
-					value: "#Name#",
+					name: "Status",
 					placeholder: "Options",
 					options: {
 						body: {
@@ -37,12 +38,7 @@ export default class ContactsForm extends JetView {
 					}
 				},
 				{cols: [
-					{view: "button",
-						value: "Clear",
-						width: 200,
-						click: () => {
-							this.$$("contacts_form").clear();
-						}},
+					{},
 					{
 						view: "button",
 						value: "Save",
@@ -53,10 +49,6 @@ export default class ContactsForm extends JetView {
 							if (data.id) {
 								contacts.updateItem(data.id, data);
 								webix.message("Entry successfully updated");
-							}
-							else {
-								contacts.add(data);
-								webix.message("Entry successfully added");
 							}
 						}
 					}
@@ -69,7 +61,7 @@ export default class ContactsForm extends JetView {
 
 	urlChange() {
 		let id = this.getParam("id");
-		if (id) {
+		if (id && contacts.exists(id)) {
 			let item = contacts.getItem(id);
 			this.$$("contacts_form").setValues(item);
 		}

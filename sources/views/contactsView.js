@@ -2,6 +2,9 @@ import {JetView} from "webix-jet";
 import {contacts} from "../models/contacts";
 import ContactsForm from "./contactsForm";
 
+webix.protoUI({
+	name: "edit_list"
+}, webix.EditAbility, webix.ui.list);
 export default class ContactsView extends JetView {
 	config() {
 		return {
@@ -9,7 +12,11 @@ export default class ContactsView extends JetView {
 				{rows: [
 					{type: "header", template: "Contacts", css: "webix_header section_header"},
 					{
-						view: "list",
+						view: "edit_list",
+						editable: true,
+						editor: "text",
+						editValue: "Name",
+						editaction: "dblclick",
 						localId: "contacts_list",
 						template: "#Name# <br> #Email# <span class='webix_icon wxi-close remove_contact'></span>",
 						select: true,
@@ -17,7 +24,7 @@ export default class ContactsView extends JetView {
 						scroll: "auto",
 						on: {
 							onAfterSelect: (id) => {
-								this.show(`../contactsView?id=${id}`);
+								this.setParam("id", id, true);
 							}
 						},
 						onClick: {
@@ -31,6 +38,13 @@ export default class ContactsView extends JetView {
 								});
 							}
 						}
+					},
+					{
+						view: "button",
+						value: "Add",
+						click: () => {
+							contacts.add({Name: "John Doe", Email: "2134@aol.com"});
+						}
 					}
 				]},
 				ContactsForm
@@ -38,17 +52,18 @@ export default class ContactsView extends JetView {
 		};
 	}
 
-	init(view) {
-		view.queryView("list").sync(contacts);
-		let list = this.$$("contacts_list");
-		list.select(list.getFirstId());
+	init() {
+		this.$$("contacts_list").sync(contacts);
 	}
 
 	urlChange() {
 		let list = this.$$("contacts_list");
 		let id = this.getParam("id");
 
-		if (id && list.exists(id)) {
+		if (!id) {
+			list.select(contacts.getFirstId());
+		}
+		else if (id && contacts.exists(id)) {
 			list.select(id);
 		}
 	}

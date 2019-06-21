@@ -24,8 +24,8 @@ export default class DataView extends JetView {
 				{cols: [
 					sidebar,
 					{cells: [
-						{$subview: new Data(this.app, "", countries), id: "countries_switch"},
-						{$subview: new Data(this.app, "", statuses), id: "statuses_switch"}
+						{rows: [{$subview: new Data(this.app, "", countries)}], localId: "countries_switch"},
+						{rows: [{$subview: new Data(this.app, "", statuses)}], localId: "statuses_switch"}
 					]}
 				]}
 			]
@@ -35,7 +35,7 @@ export default class DataView extends JetView {
 	init() {
 		this.$$("data_list").select("countries_switch");
 		this.$$("data_list").attachEvent("onAfterSelect", (id) => {
-			webix.$$(id).show();
+			this.$$(id).show();
 		});
 	}
 }
