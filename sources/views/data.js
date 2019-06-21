@@ -9,6 +9,20 @@ export default class Data extends JetView {
 	config() {
 		const _ = this.app.getService("locale")._;
 
+		let columns = [];
+		const item = this._gridData.getItem(this._gridData.getFirstId());
+
+		Object.keys(item).forEach((i) => {
+			if (i !== "id") {
+				columns.push({
+					id: i,
+					header: _(i),
+					editable: true,
+					fillspace: 1
+				});
+			}
+		});
+
 		return {
 			rows: [
 				{
@@ -18,7 +32,8 @@ export default class Data extends JetView {
 					borderless: true,
 					editor: "text",
 					editaction: "dblclick",
-					autoConfig: true,
+					// autoConfig: true,
+					columns,
 					scroll: "auto",
 					css: "webix_shadow_medium"
 				},

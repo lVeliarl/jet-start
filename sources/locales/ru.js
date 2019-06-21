@@ -19,5 +19,9 @@ export default {
 	Statuses: "Статусы",
 	Add: "Добавить",
 	App: "Приложение",
-	Options: "Настройки"
+	Options: "Настройки",
+	Name: "Название",
+	Icon: "Иконка",
+	English: "Английский",
+	Russian: "Русский"
 };

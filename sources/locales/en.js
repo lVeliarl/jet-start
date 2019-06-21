@@ -19,6 +19,10 @@ export default {
 	Statuses: "Statuses",
 	Add: "Add",
 	App: "App",
-	Options: "Options"
+	Options: "Options",
+	Name: "Name",
+	Icon: "Icon",
+	English: "English",
+	Russian: "Russian"
 };
 
