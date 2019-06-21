@@ -10,6 +10,7 @@ export default class Data extends JetView {
 		return {
 			rows: [
 				{view: "datatable",
+					localId: "data",
 					editable: true,
 					borderless: true,
 					editor: "text",
@@ -21,9 +22,25 @@ export default class Data extends JetView {
 					{gravity: 2},
 					{view: "button",
 						value: "Add new",
-						click: () => {}
+						click: () => {
+							let id = this.$$("data").add({ });
+							this.$$("data").editRow(id);
+						}
 					},
-					{view: "button", value: "Delete"}
+					{view: "button",
+						value: "Delete",
+						click: () => {
+							let table = this.$$("data");
+							let id = this.$$("data").getSelectedId();
+							if (table.isSelected(id)) {
+								table.remove(table.getSelectedId());
+							}
+							else if (table.getLastId()) {
+								table.editStop();
+								table.remove(table.getLastId());
+								table.editCell(table.getLastId());
+							}
+						}}
 				],
 				type: "empty"}
 			]

@@ -56,3 +56,7 @@
 	font-size:20px;
 	vertical-align:middle;
 }
+.section_header.webix_header {
+	text-align: center;
+	background-color: rgba(132, 215, 248, 0.7);
+}

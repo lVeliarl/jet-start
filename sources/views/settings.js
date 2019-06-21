@@ -1,20 +1,21 @@
 import {JetView} from "webix-jet";
-import Toolbar from "./toolbar";
 
-export default class ContactsView extends JetView {
+export default class SettingsView extends JetView {
 	config() {
 		return {
 			rows: [
-				Toolbar,
+				{type: "header", template: "Settings", css: "webix_header section_header"},
 				{cols: [
-					{view: "label", label: "Language:", width: 100},
-					{view: "select",
+					{
+						view: "select",
+						label: "Language:",
 						options: [
 							{id: "1", value: "RU"},
 							{id: "2", value: "EN"}
 						]}
-				]},
-				{template: " "}
+				],
+				type: "section"},
+				{template: " ", borderless: true}
 			]
 		};
 	}
