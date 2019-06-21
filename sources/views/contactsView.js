@@ -60,7 +60,7 @@ export default class ContactsView extends JetView {
 		let list = this.$$("contacts_list");
 		let id = this.getParam("id");
 
-		if (!id) {
+		if (!contacts.exists(id)) {
 			list.select(contacts.getFirstId());
 		}
 		else if (id && contacts.exists(id)) {
