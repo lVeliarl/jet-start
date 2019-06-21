@@ -18,7 +18,6 @@ export default class ContactsView extends JetView {
 						on: {
 							onAfterSelect: (id) => {
 								this.show(`../contactsView?id=${id}`);
-								this.app.callEvent("onAfterSelect", [id]);
 							}
 						}
 					}

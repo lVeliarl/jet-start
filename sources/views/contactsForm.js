@@ -36,14 +36,8 @@ export default class ContactsForm extends JetView {
 		};
 	}
 
-	init() {
-		this.on(this.app, "onAfterSelect", (id) => {
-			let item = contacts.getItem(id);
-			this.$$("contacts_form").setValues(item);
-		});
-	}
-
 	urlChange() {
-		// this.$$("contacts_form").getParam("id");
+		let item = contacts.getItem(this.getParam("id"));
+		this.$$("contacts_form").setValues(item);
 	}
 }
