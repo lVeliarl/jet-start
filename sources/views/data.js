@@ -30,14 +30,18 @@ export default class Data extends JetView {
 				{
 					view: "datatable",
 					localId: "data",
-					editable: true,
-					borderless: true,
 					editor: "text",
 					editaction: "dblclick",
-					autoConfig: true,
-					// columns: [
-					// 	{id: "Name", header: _("Name"), fillspace: true}
-					// ],
+					editable: true,
+					borderless: true,
+					columns: [
+						{
+							id: "Name",
+							header: _("Name"),
+							fillspace: true,
+							editor: "text"
+						}
+					],
 					scroll: "y",
 					css: "webix_shadow_medium"
 				},
