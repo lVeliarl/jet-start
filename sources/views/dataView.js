@@ -17,7 +17,12 @@ export default class DataView extends JetView {
 			data: [
 				{value: _("Countries"), id: "countries_switch"},
 				{value: _("Statuses"), id: "statuses_switch"}
-			]
+			],
+			on: {
+				onAfterSelect: (id) => {
+					this.setParam("data", id, true);
+				}
+			}
 		};
 
 		return {

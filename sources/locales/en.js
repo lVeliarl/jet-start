@@ -23,6 +23,7 @@ export default {
 	Name: "Name",
 	Icon: "Icon",
 	English: "English",
-	Russian: "Russian"
+	Russian: "Russian",
+	Code: "Code"
 };
 

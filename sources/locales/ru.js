@@ -23,5 +23,6 @@ export default {
 	Name: "Название",
 	Icon: "Иконка",
 	English: "Английский",
-	Russian: "Русский"
+	Russian: "Русский",
+	Code: "Код"
 };

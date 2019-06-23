@@ -35,7 +35,7 @@ export default class ContactsView extends JetView {
 									title: "Remove this item",
 									text: "Are you sure you want to remive this item?"
 								}).then(() => {
-									this.$$("contacts_list").remove(id);
+									contacts.remove(id);
 									this.$$("contacts_list").clearSelection();
 								});
 							}
@@ -45,7 +45,7 @@ export default class ContactsView extends JetView {
 						view: "button",
 						value: _("Add"),
 						click: () => {
-							contacts.add({Name: "John Doe", Email: "2134@aol.com"});
+							contacts.add({Name: "John Doe", Email: "2134@aol.com", Status: 1, Country: 1});
 						}
 					}
 				]},
@@ -59,14 +59,16 @@ export default class ContactsView extends JetView {
 	}
 
 	urlChange() {
-		let list = this.$$("contacts_list");
-		let id = this.getParam("id");
+		contacts.waitData.then(() => {
+			let list = this.$$("contacts_list");
+			let id = this.getParam("id");
 
-		if (!contacts.exists(id)) {
-			list.select(contacts.getFirstId());
-		}
-		else if (id && contacts.exists(id)) {
-			list.select(id);
-		}
+			if (!contacts.exists(id)) {
+				list.select(contacts.getFirstId());
+			}
+			else if (id && contacts.exists(id)) {
+				list.select(id);
+			}
+		});
 	}
 }

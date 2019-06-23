@@ -1,4 +1,6 @@
 import {JetView} from "webix-jet";
+import {countries} from "../models/countries";
+import {statuses} from "../models/statuses";
 
 export default class Data extends JetView {
 	constructor(app, name, data) {
@@ -9,19 +11,19 @@ export default class Data extends JetView {
 	config() {
 		const _ = this.app.getService("locale")._;
 
-		let columns = [];
-		const item = this._gridData.getItem(this._gridData.getFirstId());
+		// let columns = [];
+		// const item = this._gridData.getItem(this._gridData.getFirstId());
 
-		Object.keys(item).forEach((i) => {
-			if (i !== "id") {
-				columns.push({
-					id: i,
-					header: _(i),
-					editable: true,
-					fillspace: 1
-				});
-			}
-		});
+		// Object.keys(item).forEach((i) => {
+		// 	if (i !== "id") {
+		// 		columns.push({
+		// 			id: i,
+		// 			header: _(i),
+		// 			editable: true,
+		// 			fillspace: 1
+		// 		});
+		// 	}
+		// });
 
 		return {
 			rows: [
@@ -32,9 +34,11 @@ export default class Data extends JetView {
 					borderless: true,
 					editor: "text",
 					editaction: "dblclick",
-					// autoConfig: true,
-					columns,
-					scroll: "auto",
+					autoConfig: true,
+					// columns: [
+					// 	{id: "Name", header: _("Name"), fillspace: true}
+					// ],
+					scroll: "y",
 					css: "webix_shadow_medium"
 				},
 				{cols: [
@@ -44,9 +48,15 @@ export default class Data extends JetView {
 						value: _("Add new"),
 						css: "webix_primary",
 						click: () => {
+							let currentTab = this.getParam("data");
 							let table = this.$$("data");
-							let id = table.add({ });
-							table.editRow(id);
+							if (currentTab === "countries_switch") {
+								countries.add({});
+							}
+							else if (currentTab === "statuses_switch") {
+								statuses.add({});
+							}
+							table.editRow(table.getLastId());
 						}
 					},
 					{
@@ -61,7 +71,13 @@ export default class Data extends JetView {
 									title: "Remove this entry",
 									text: "Are you sure you want to remove this entry?"
 								}).then(() => {
-									table.remove(table.getSelectedId());
+									let currentTab = this.getParam("data");
+									if (currentTab === "countries_switch") {
+										countries.remove(table.getSelectedId());
+									}
+									else if (currentTab === "statuses_switch") {
+										statuses.remove(table.getSelectedId());
+									}
 								});
 							}
 							else {
@@ -75,7 +91,7 @@ export default class Data extends JetView {
 	}
 
 	init() {
-		this.$$("data").parse(this._gridData);
+		this.$$("data").sync(this._gridData);
 	}
 }
 

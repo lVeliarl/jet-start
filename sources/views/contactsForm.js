@@ -62,10 +62,15 @@ export default class ContactsForm extends JetView {
 	}
 
 	urlChange() {
-		let id = this.getParam("id");
-		if (id && contacts.exists(id)) {
-			let item = contacts.getItem(id);
-			this.$$("contacts_form").setValues(item);
-		}
+		webix.promise.all([
+			contacts.waitData,
+			statuses.waitData
+		]).then(() => {
+			let id = this.getParam("id");
+			if (id && contacts.exists(id)) {
+				let item = contacts.getItem(id);
+				this.$$("contacts_form").setValues(item);
+			}
+		});
 	}
 }
