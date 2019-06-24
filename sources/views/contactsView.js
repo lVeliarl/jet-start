@@ -33,7 +33,7 @@ export default class ContactsView extends JetView {
 							remove_contact: (e, id) => {
 								this.webix.confirm({
 									title: "Remove this item",
-									text: "Are you sure you want to remive this item?"
+									text: "Are you sure you want to remove this item?"
 								}).then(() => {
 									contacts.remove(id);
 									this.$$("contacts_list").clearSelection();
