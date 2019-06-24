@@ -1,6 +1,4 @@
 import {JetView} from "webix-jet";
-import {countries} from "../models/countries";
-import {statuses} from "../models/statuses";
 
 export default class Data extends JetView {
 	constructor(app, name, data) {
@@ -11,20 +9,6 @@ export default class Data extends JetView {
 	config() {
 		const _ = this.app.getService("locale")._;
 
-		// let columns = [];
-		// const item = this._gridData.getItem(this._gridData.getFirstId());
-
-		// Object.keys(item).forEach((i) => {
-		// 	if (i !== "id") {
-		// 		columns.push({
-		// 			id: i,
-		// 			header: _(i),
-		// 			editable: true,
-		// 			fillspace: 1
-		// 		});
-		// 	}
-		// });
-
 		return {
 			rows: [
 				{
@@ -34,6 +18,7 @@ export default class Data extends JetView {
 					editaction: "dblclick",
 					editable: true,
 					borderless: true,
+					select: true,
 					columns: [
 						{
 							id: "Name",
@@ -52,14 +37,8 @@ export default class Data extends JetView {
 						value: _("Add new"),
 						css: "webix_primary",
 						click: () => {
-							let currentTab = this.getParam("data");
 							let table = this.$$("data");
-							if (currentTab === "countries_switch") {
-								countries.add({});
-							}
-							else if (currentTab === "statuses_switch") {
-								statuses.add({});
-							}
+							this._gridData.add({});
 							table.editRow(table.getLastId());
 						}
 					},
@@ -75,13 +54,7 @@ export default class Data extends JetView {
 									title: "Remove this entry",
 									text: "Are you sure you want to remove this entry?"
 								}).then(() => {
-									let currentTab = this.getParam("data");
-									if (currentTab === "countries_switch") {
-										countries.remove(table.getSelectedId());
-									}
-									else if (currentTab === "statuses_switch") {
-										statuses.remove(table.getSelectedId());
-									}
+									this._gridData.remove(table.getSelectedId());
 								});
 							}
 							else {
@@ -95,7 +68,29 @@ export default class Data extends JetView {
 	}
 
 	init() {
-		this.$$("data").sync(this._gridData);
+		let table = this.$$("data");
+		table.sync(this._gridData);
+
+		// this._gridData.waitData.then(() => {
+		// 	let columns = [];
+		// 	const item = this._gridData.getItem(this._gridData.getFirstId());
+
+		// 	Object.keys(item).forEach((i) => {
+		// 		if (i !== "id") {
+		// 			columns.push({
+		// 				id: i,
+		// 				header: _(i),
+		// 				editable: true,
+		// 				fillspace: 1
+		// 			});
+		// 		}
+		// 	});
+
+		// 	table.config.columns = columns;
+		// 	table.refreshColumns();
+
+		// 	console.log(table.config.columns);
+		// });
 	}
 }
 
